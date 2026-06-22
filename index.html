@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAMI OS v1.7.0 - Göktürk Edition</title>
+    <title>TAMI OS v1.6.5 - Göktürk Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <style>
         body { font-family: 'Share Tech Mono', monospace; }
         .cyber-grid {
@@ -29,58 +30,26 @@
         .window-content::-webkit-scrollbar { width: 4px; }
         .window-content::-webkit-scrollbar-track { background: #09090b; }
         .window-content::-webkit-scrollbar-thumb { background: #10b981; border-radius: 10px; }
-        
-        @keyframes type {
-          from { width: 0; }
-          to { width: 100%; }
-        }
-        @keyframes blink-caret {
-          from, to { border-color: transparent; }
-          50% { border-color: #10b981; }
-        }
-        .typing-text {
-            display: inline-block;
-            overflow: hidden;
-            letter-spacing: 0.15em;
-            animation: type 1.5s steps(30, end), blink-caret 0.5s step-end infinite;
-            border-right: 2px solid #10b981;
-            white-space: nowrap;
-        }
     </style>
-
-    <script>
-        function skipBoot() {
-            const bootScreen = document.getElementById('bootScreen');
-            const mainDesktop = document.getElementById('mainDesktop');
-            if (bootScreen && mainDesktop) {
-                bootScreen.style.opacity = '0';
-                bootScreen.style.visibility = 'hidden';
-                mainDesktop.style.opacity = '1';
-                console.log("Sistem başarıyla bypass edildi ve başlatıldı.");
-            }
-        }
-    </script>
-
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
 <body class="bg-zinc-950 text-emerald-400 min-h-screen overflow-hidden cyber-grid relative select-none">
 
     <div id="bootScreen" class="fixed inset-0 bg-black z-[1000] flex flex-col items-center justify-center font-mono text-emerald-400" style="transition: opacity 0.5s ease, visibility 0.5s;">
         <div class="space-y-4 max-w-lg w-full px-8">
-            <div id="bootLog" class="text-[11px] h-32 overflow-hidden leading-relaxed text-zinc-600">
+            <div id="bootLog" class="text-[11px] h-40 overflow-hidden leading-relaxed text-zinc-600">
                 &gt; TAMI OS BOOT_SEQUENCE [ACTIVE]<br>
-                &gt; CORE_KERNEL_v1.7 LOADED...<br>
+                &gt; CORE_KERNEL_v1.6 LOADED...<br>
                 &gt; DECRYPTION_KEYS_VERIFIED...<br>
                 &gt; FIREBASE_CLOUD_SYNC_ESTABLISHED...<br>
+                &gt; AUTH_KEY: [HIDDEN]...<br>
                 &gt; DECRYPTING_USER_PROFILE...<br>
                 &gt; GÖKTÜRK K. PROFILE DETECTED...<br>
             </div>
             
-            <div id="welcomeContainer" class="text-center mt-4">
-                <h1 class="text-xl font-black text-white tracking-widest"><span class="typing-text">SYSTEM_ADMIN: GÖKTÜRK K.</span></h1>
-                <p id="bootMessage" class="text-emerald-300 text-xs mt-2 font-bold">Hoşgeldin Göktürk. Sistem Yetkisi Verildi.</p>
-                <button onclick="skipBoot()" class="text-xs bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 px-6 py-2 mt-6 rounded-full hover:bg-emerald-500 hover:text-black transition cursor-pointer font-bold uppercase tracking-widest">Sisteme Giriş Yap</button>
+            <div id="welcomeContainer" class="text-center mt-6" style="opacity: 0; transition: opacity 0.5s ease;">
+                <h1 class="text-xl font-black text-white tracking-widest animate-pulse">SYSTEM_ADMIN: GÖKTÜRK K.</h1>
+                <p class="text-emerald-300 text-xs mt-3 font-bold">Hoşgeldin Göktürk. Sistem Yetkisi Verildi.</p>
+                <button onclick="skipBoot()" class="text-xs bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 px-6 py-2 mt-8 rounded-full hover:bg-emerald-500 hover:text-black transition cursor-pointer">Sisteme Giriş Yap</button>
             </div>
         </div>
     </div>
@@ -92,7 +61,7 @@
         <header class="w-full border-b border-emerald-500/30 bg-zinc-900/80 backdrop-blur-md px-6 py-2 flex justify-between items-center text-xs tracking-widest z-[100] relative">
             <div class="flex items-center gap-3">
                 <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
-                <span class="font-bold text-white">TAMI_OS // CORE_v1.7.0 // [COMMAND_CENTER]</span>
+                <span class="font-bold text-white">TAMI_OS // CORE_v1.6.5 // [COMMAND_CENTER]</span>
             </div>
             <div class="text-[10px] text-emerald-300 hidden sm:block">⚙️ EMULATOR_MODE // F: TAM EKRAN</div>
             <div id="liveClock" class="text-emerald-300 font-bold">00:00:00</div>
@@ -124,4 +93,80 @@
 
                     <div onclick="alert('Terminal Bağlantısı: TAMI_SHELL aktif durumda.')" class="flex flex-col items-center justify-center p-3 rounded-xl border border-transparent hover:border-cyan-500/30 hover:bg-cyan-500/10 cursor-pointer transition text-center group">
                         <div class="text-3xl mb-1 group-hover:scale-110 transition opacity-40">💻</div>
-                        <span class="text
+                        <span class="text-[11px] font-bold tracking-wider text-zinc-600 group-hover:text-cyan-400">TAMI_SHELL</span>
+                    </div>
+                </main>
+
+                <section class="hidden sm:block w-36 bg-zinc-900/30 border border-zinc-800 rounded-xl p-3 font-mono text-[10px] space-y-1 backdrop-blur-sm">
+                    <span class="text-zinc-500 block uppercase tracking-widest text-[9px]">📍 Kemalpaşa / Izmir</span>
+                    <div class="flex items-center justify-between mt-1">
+                        <span class="text-lg">🌙</span>
+                        <span class="text-white font-bold text-xs">22°C</span>
+                    </div>
+                    <p class="text-emerald-400/80">Sistem Havası: Berrak</p>
+                </section>
+            </div>
+
+            <div class="hidden md:flex flex-col justify-center items-center flex-1 pointer-events-none relative z-10">
+                <div class="w-64 bg-zinc-950/60 border border-zinc-800/80 rounded-xl p-3 pointer-events-auto shadow-xl backdrop-blur-xs">
+                    <div class="flex justify-between items-center border-b border-zinc-800 pb-1.5 mb-2">
+                        <span class="text-[9px] text-zinc-500 tracking-wider uppercase font-bold">📝 TAMI_SCRATCHPAD</span>
+                        <span class="w-1.5 h-1.5 bg-yellow-500/60 rounded-full"></span>
+                    </div>
+                    <textarea id="scratchpad" placeholder="Hızlıca bir şeyler karala kanka (otomatik kaydedilir)..." class="w-full h-24 bg-transparent text-zinc-300 text-[11px] focus:outline-none resize-none font-sans leading-relaxed"></textarea>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 self-end sm:self-start z-10 w-full sm:w-auto mt-4 sm:mt-0">
+                
+                <section class="w-full sm:w-60 bg-zinc-900/40 border border-purple-500/20 rounded-xl p-4 font-mono text-[11px] space-y-3 backdrop-blur-sm">
+                    <div class="border-b border-purple-500/30 pb-2 flex justify-between items-center">
+                        <span class="font-bold text-white tracking-widest text-xs">🐙 GITHUB INTERFACE</span>
+                        <span class="text-[9px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded uppercase">Connected</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full border border-purple-500/40 bg-zinc-950 flex items-center justify-center text-xl font-bold text-purple-400 shadow-inner">G</div>
+                        <div>
+                            <span class="text-zinc-400 block text-[10px]">@evrenelgokturk-jpg</span>
+                            <span class="text-white font-bold tracking-wide">Göktürk Elverdi</span>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-950/80 border border-zinc-900 p-2 rounded-lg space-y-1 text-zinc-400 text-[10px]">
+                        <p class="text-purple-300 font-bold">&gt;_ Active Repository:</p>
+                        <p class="text-white font-semibold">akilli-gardirob</p>
+                        <p class="text-zinc-500">Sync status: <span class="text-emerald-400">Up to date</span></p>
+                    </div>
+                </section>
+
+                <section class="w-full sm:w-56 bg-zinc-900/40 border border-emerald-500/10 rounded-xl p-4 font-mono text-[11px] space-y-3 backdrop-blur-sm">
+                    <div class="border-b border-emerald-500/20 pb-2 flex justify-between items-center">
+                        <span class="font-bold text-white tracking-widest text-xs">📊 SYSTEM MONITOR</span>
+                        <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded uppercase">Online</span>
+                    </div>
+                    <div>
+                        <span class="text-zinc-500 block">CURRENT_ADMIN:</span>
+                        <span class="text-emerald-300 font-bold text-xs tracking-wider">Göktürk K. [ROOT]</span>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-zinc-400">
+                            <span>CPU LOAD:</span>
+                            <span id="cpuLoad" class="text-emerald-400 font-bold">3%</span>
+                        </div>
+                        <div class="w-full bg-zinc-950 h-1.5 rounded-full overflow-hidden border border-zinc-800">
+                            <div id="cpuBar" class="bg-emerald-500 h-full transition-all duration-700" style="width: 3%"></div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+        <footer class="w-full border-t border-emerald-500/20 bg-zinc-950/90 text-[10px] px-6 py-1 flex justify-between items-center text-zinc-500 z-[100]">
+            <span>CPU_LOAD: STABLE // ROOT_USER: GÖKTÜRK_K</span>
+            <span>DESIGNED BY TAMI // SYSTEM_SHELL</span>
+        </footer>
+    </div>
+
+    <div id="win-finance" onmousedown="focusWindow('win-finance')" class="hidden absolute top-16 left-8 w-[95%] sm:w-[480px] h-[500px] bg-zinc-950 border border-emerald-500/30 shadow-2xl rounded-lg flex flex-col z-40 overflow-hidden">
+        <div class="window-header bg-zinc-900 border-b border-emerald-500/30 px-4 py-2 flex justify-between items-center cursor-move
+            
