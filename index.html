@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAMI OS v1.6 - Göktürk Edition</title>
+    <title>TAMI OS v1.6.1 - Göktürk Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -44,9 +44,7 @@
             display: inline-block;
             overflow: hidden;
             letter-spacing: 0.15em;
-            animation: 
-              type 1.5s steps(30, end),
-              blink-caret 0.5s step-end infinite;
+            animation: type 1.5s steps(30, end), blink-caret 0.5s step-end infinite;
             border-right: 2px solid #10b981;
             white-space: nowrap;
         }
@@ -72,8 +70,8 @@
             </div>
             
             <div id="welcomeContainer" class="hidden text-center mt-6">
-                <h1 class="text-2xl font-black text-white tracking-widest"><span class="typing-text">SYSTEM_ADMIN: GÖKTÜRK K.</span></h1>
-                <p id="bootMessage" class="text-emerald-300 text-sm mt-3 font-bold">Hoşgeldin Göktürk. Sistem Yetkisi Verildi.</p>
+                <h1 class="text-xl font-black text-white tracking-widest"><span class="typing-text">SYSTEM_ADMIN: GÖKTÜRK K.</span></h1>
+                <p id="bootMessage" class="text-emerald-300 text-xs mt-3 font-bold">Hoşgeldin Göktürk. Sistem Yetkisi Verildi.</p>
                 <button onclick="skipBoot()" class="text-xs bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 px-6 py-2 mt-8 rounded-full hover:bg-emerald-500 hover:text-black transition cursor-pointer">Sisteme Giriş Yap</button>
             </div>
         </div>
@@ -84,9 +82,9 @@
     <header class="w-full border-b border-emerald-500/30 bg-zinc-900/80 backdrop-blur-md px-6 py-2 flex justify-between items-center text-xs tracking-widest z-[100] relative">
         <div class="flex items-center gap-3">
             <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
-            <span class="font-bold text-white">TAMI_OS // CORE_v1.6 // [GÖKTÜRK EDITION]</span>
+            <span class="font-bold text-white">TAMI_OS // CORE_v1.6.1 // [GÖKTÜRK EDITION]</span>
         </div>
-        <div class="text-[10px] text-emerald-300 hidden sm:block">⚙️ NO_IFRAME // EMULATOR_MODE // F: TAM EKRAN</div>
+        <div class="text-[10px] text-emerald-300 hidden sm:block">⚙️ EMULATOR_MODE // F: TAM EKRAN</div>
         <div id="liveClock" class="text-emerald-300 font-bold">00:00:00</div>
     </header>
 
@@ -185,12 +183,12 @@
     </div>
 
     <footer class="absolute bottom-0 w-full border-t border-emerald-500/20 bg-zinc-950/90 text-[10px] px-6 py-1 flex justify-between items-center text-zinc-500 z-[100]">
-        <span>CPU_LOAD: 3% // NATIVE_EMULATION // SYSTEM_ADMIN: GÖKTÜRK_K</span>
+        <span>CPU_LOAD: STABLE // ROOT_USER: GÖKTÜRK_K</span>
         <span>DESIGNED BY TAMI // SYSTEM_SHELL</span>
     </footer>
 
     <script>
-        // ================= FIREBASE BAĞLANTISI (DEĞİŞMEDİ) =================
+        // ================= FIREBASE BAĞLANTISI =================
         const firebaseConfig = {
             apiKey: "AIzaSyA7o96OrqwYXWby-TH7EPbdoXZo_kKscA",
             authDomain: "akilli-gardirob.firebaseapp.com",
@@ -208,38 +206,33 @@
         const welcomeContainer = document.getElementById('welcomeContainer');
         const bootScreen = document.getElementById('bootScreen');
         
-        // --- Canlı Saat ---
         function updateClock() { document.getElementById('liveClock').textContent = new Date().toTimeString().split(' ')[0]; }
         setInterval(updateClock, 1000); updateClock();
 
-        // --- AÇILIŞ VE HOŞGELDİN ANİMASYONU ---
+        // --- AÇILIŞ ANİMASYONUNU TETİKLEYEN MOTOR ---
         function handleBoot() {
-            // "Göktürk edition" yazılı bir bayrak kontrolü yapmıyoruz, her zaman hoş geldin desin!
-            
             let logLines = bootLog.innerHTML.split('<br>');
             bootLog.innerHTML = "";
             let currentLine = 0;
 
             function printLog() {
-                if (currentLine < logLines.length) {
+                if (currentLine < logLines.length - 1) {
                     bootLog.innerHTML += logLines[currentLine] + '<br>';
                     currentLine++;
-                    setTimeout(printLog, 300); // Satır satır boot loğu aksın
+                    setTimeout(printLog, 200); 
                 } else {
-                    // Log bitti, hoş geldin yazısını çıkar
-                    setTimeout(() => { welcomeContainer.classList.remove('hidden'); }, 1000);
+                    setTimeout(() => { welcomeContainer.classList.remove('hidden'); }, 500);
                 }
             }
             printLog();
         }
 
-        // --- Sisteme Giriş ---
         function skipBoot() {
-            bootScreen.classList.add('hide'); // Ekranı kaydır
-            setTimeout(() => { bootScreen.style.display = 'none'; }, 1000); // 1sn sonra yok et
+            bootScreen.classList.add('hide');
+            setTimeout(() => { bootScreen.style.display = 'none'; }, 1000);
         }
 
-        // --- Pencere Yönetimi ---
+        // --- Pencere Kontrolleri ---
         function openWindow(id) { document.getElementById(id).classList.remove('hidden'); focusWindow(id); }
         function closeWindow(id) { document.getElementById(id).classList.add('hidden'); }
         function focusWindow(id) {
@@ -248,7 +241,7 @@
             document.getElementById(id).classList.add('window-active');
         }
 
-        // --- MANUEL SÜRÜKLEME VE BÜYÜTME MOTORU (DEĞİŞMEDİ) ---
+        // --- Manuel Taşıma / Boyutlandırma ---
         document.querySelectorAll('[id^="win-"]').forEach(win => {
             const header = win.querySelector('.window-header');
             const resizer = win.querySelector('.resizer');
@@ -280,8 +273,7 @@
             if (e.key.toLowerCase() === 'f') { if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {}); else document.exitFullscreen(); }
         });
 
-        // ================= SİSTEM JS MOTORLARI (DEĞİŞMEDİ) =================
-        // ... (Kod kalabalığı yapmamak için Tami Asistan ve Smart Gardırop JS kodlarını aynen korudum, sadece IDs ve selectors'larını ana index.html'e bağladım. Tıkır tıkır çalışmaya devam edecekler kanka) ...
+        // ================= SİSTEM JS MOTORLARI (EKSİKSİZ TAM SÜRÜM) =================
         const subForm = document.getElementById("subForm");
         const subList = document.getElementById("subList");
         const asistanMesaji = document.getElementById("asistanMesaji");
@@ -293,18 +285,26 @@
             if (haftalikHarclik <= 0 || hedefFiyat <= 0) return;
             const aylikKazanc = haftalikHarclik * 4.33;
             const aylikNetBiriken = aylikKazanc - toplamAylikGider;
-            if (aylikNetBiriken <= 0) { safakMetni.innerHTML = `❌ <span class='text-red-400'>Giderlerin çok kanka!</span>`; safakBar.style.width = "0%"; return; }
+            if (aylikNetBiriken <= 0) { safakMetni.innerHTML = `❌ <span class='text-red-400 font-bold'>Giderler harçlığı geçiyor!</span>`; safakBar.style.width = "0%"; return; }
             const gerekenAy = hedefFiyat / aylikNetBiriken;
             const toplamKalanGun = Math.ceil(gerekenAy * 30);
             const kalanHafta = Math.floor(toplamKalanGun / 7);
             const kalanGunMod = toplamKalanGun % 7;
-            safakMetni.innerHTML = `🎯 <span class='text-lime-400'>${hedefIsim}</span>:<br><span class='text-lg text-white block'>${kalanHafta} H ${kalanGunMod} G</span>`;
+            safakMetni.innerHTML = `🎯 <span class='text-lime-400 font-bold'>${hedefIsim}</span>:<br><span class='text-base text-white block font-black'>${kalanHafta} Hafta ${kalanGunMod} Gün</span>`;
             const yuzde = Math.min(100, Math.max(10, (100 - (kalanHafta * 2)))); safakBar.style.width = `${yuzde}%`;
         }
+
         function tamiAsistanYukle() {
             db.collection("user_finance").doc("tami_user").onSnapshot((doc) => {
                 if (doc.exists) {
-                    const data = doc.data(); document.getElementById("weeklyIncome").value = data.weeklyIncome || ""; document.getElementById("targetName").value = data.targetName || ""; document.getElementById("targetPrice").value = data.targetPrice || ""; haftalikHarclik = Number(data.weeklyIncome) || 0; hedefIsim = data.targetName || ""; hedefFiyat = Number(data.targetPrice) || 0; hesaplaVeRaporla();
+                    const data = doc.data(); 
+                    document.getElementById("weeklyIncome").value = data.weeklyIncome || ""; 
+                    document.getElementById("targetName").value = data.targetName || ""; 
+                    document.getElementById("targetPrice").value = data.targetPrice || ""; 
+                    haftalikHarclik = Number(data.weeklyIncome) || 0; 
+                    hedefIsim = data.targetName || ""; 
+                    hedefFiyat = Number(data.targetPrice) || 0; 
+                    hesaplaVeRaporla();
                 }
             });
             db.collection("subscriptions").onSnapshot((snapshot) => {
@@ -312,5 +312,55 @@
                 snapshot.forEach((doc) => {
                     const sub = doc.data(); toplamAylikGider += Number(sub.price);
                     let kalanGun = sub.day - guncelGun; if (kalanGun < 0) kalanGun = (30 - guncelGun) + Number(sub.day);
-                    const card = document.createElement("div"); card.className = "bg-zinc-900 border border-zinc-800 rounded-xl p-3 flex justify-between items-center text-zinc-100";
-                    card.innerHTML = `<div><h4 class="text-xs font-bold uppercase">${sub.name}](https://firebase.google.com/docs/hosting/full-config#headers)</code>
+                    const card = document.createElement("div"); card.className = "bg-zinc-900 border border-zinc-800 rounded-xl p-3 flex justify-between items-center text-zinc-100 mb-2";
+                    card.innerHTML = `<div><h4 class="text-xs font-bold uppercase text-white">${sub.name}</h4><p class="text-[10px] text-zinc-500">${sub.price} TL | Gün: ${sub.day}</p></div><button onclick="deleteSub('${doc.id}')" class="text-xs hover:text-red-400 p-1">🗑️</button>`;
+                    subList.appendChild(card);
+                });
+                asistanMesaji.innerHTML = `✅ <span class="text-lime-400 font-bold">Bulut Aktif.</span> Yaklaşan acil ödemen yok kanka.`;
+                hesaplaVeRaporla();
+            });
+        }
+
+        document.getElementById("saveFinanceBtn").addEventListener("click", async () => {
+            const w = document.getElementById("weeklyIncome").value; const tn = document.getElementById("targetName").value; const tp = document.getElementById("targetPrice").value;
+            if(!w || !tn || !tp) return alert("Boş bırakma kanka!");
+            try { await db.collection("user_finance").doc("tami_user").set({ weeklyIncome: Number(w), targetName: tn, targetPrice: Number(tp) }); alert("Bulutla senkronize edildi! 🚀"); } catch (e) { alert("Bulut hatası!"); }
+        });
+
+        subForm.addEventListener("submit", async (e) => {
+            e.preventDefault(); const n = document.getElementById("subName").value; const p = document.getElementById("subPrice").value; const d = document.getElementById("subDay").value;
+            try { await db.collection("subscriptions").add({ name: n, price: Number(p), day: Number(d) }); subForm.reset(); } catch (error) { alert("Hata!"); }
+        });
+
+        window.deleteSub = async (id) => { if(confirm("Silinsin mi kanka?")) await db.collection("subscriptions").doc(id).delete(); };
+
+        // ================= SMART GARDIROP MOTORU =================
+        const clothesForm = document.getElementById("clothesForm"); const clothesList = document.getElementById("clothesList");
+        function gardiropYukle() {
+            db.collection("clothes").onSnapshot((snapshot) => {
+                clothesList.innerHTML = "";
+                snapshot.forEach((doc) => {
+                    const cloth = doc.data(); const div = document.createElement("div");
+                    div.className = "bg-zinc-900 border border-zinc-800 rounded-xl p-3 flex justify-between items-center text-zinc-100 mb-2";
+                    div.innerHTML = `<div><p class="text-xs font-semibold text-white">${cloth.name}</p><span class="text-[9px] bg-zinc-900 border border-zinc-800 text-zinc-400 px-2 py-0.5 rounded-full">${cloth.category}</span></div><button onclick="deleteCloth('${doc.id}')" class="text-xs hover:text-red-400 p-1">🗑️</button>`;
+                    clothesList.appendChild(div);
+                });
+            });
+        }
+
+        clothesForm.addEventListener("submit", async (e) => {
+            e.preventDefault(); const name = document.getElementById("clothName").value; const category = document.getElementById("clothCategory").value;
+            try { await db.collection("clothes").add({ name: name, category: category, timestamp: new Date() }); clothesForm.reset(); } catch (error) { alert("Hata!"); }
+        });
+
+        window.deleteCloth = async (id) => { if(confirm("Kıyafeti silinsin mi kanka?")) await db.collection("clothes").doc(id).delete(); };
+
+        // ================= TÜM SİSTEMİ ATEŞLEME =================
+        window.onload = () => {
+            handleBoot(); // 🚀 İşte o sihirli dokunuş! Açılış ekranını başlatıyoruz.
+            tamiAsistanYukle();
+            gardiropYukle();
+        };
+    </script>
+</body>
+</html>
