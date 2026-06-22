@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAMI OS v1.6.2 - Göktürk Edition</title>
+    <title>TAMI OS v1.6.3 - Göktürk Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -77,69 +77,76 @@
         </div>
     </div>
 
-    <div class="absolute inset-0 bg-radial-at-t from-emerald-500/10 via-transparent to-transparent pointer-events-none"></div>
-
-    <header class="w-full border-b border-emerald-500/30 bg-zinc-900/80 backdrop-blur-md px-6 py-2 flex justify-between items-center text-xs tracking-widest z-[100] relative">
-        <div class="flex items-center gap-3">
-            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
-            <span class="font-bold text-white">TAMI_OS // CORE_v1.6.2 // [GÖKTÜRK EDITION]</span>
-        </div>
-        <div class="text-[10px] text-emerald-300 hidden sm:block">⚙️ EMULATOR_MODE // F: TAM EKRAN</div>
-        <div id="liveClock" class="text-emerald-300 font-bold">00:00:00</div>
-    </header>
-
-    <div class="w-full h-[calc(100vh-40px)] relative flex flex-col sm:flex-row justify-between p-6">
+    <div id="mainDesktop" class="opacity-0 transition-opacity duration-1000 w-full min-h-screen flex flex-col justify-between relative">
         
-        <main class="grid grid-cols-2 sm:grid-cols-1 gap-4 w-full sm:w-32 relative z-10 self-start">
-            <div onclick="openWindow('win-finance')" class="flex flex-col items-center justify-center p-3 rounded-xl border border-transparent hover:border-emerald-500/30 hover:bg-emerald-500/10 cursor-pointer transition text-center group">
-                <div class="text-3xl mb-1 group-hover:scale-110 transition">💰</div>
-                <span class="text-[11px] font-bold tracking-wider text-zinc-300 group-hover:text-emerald-400">TAMI_FINANCE</span>
-            </div>
+        <div class="absolute inset-0 bg-radial-at-t from-emerald-500/10 via-transparent to-transparent pointer-events-none"></div>
 
-            <div onclick="openWindow('win-wardrobe')" class="flex flex-col items-center justify-center p-3 rounded-xl border border-transparent hover:border-emerald-500/30 hover:bg-emerald-500/10 cursor-pointer transition text-center group">
-                <div class="text-3xl mb-1 group-hover:scale-110 transition">👕</div>
-                <span class="text-[11px] font-bold tracking-wider text-zinc-300 group-hover:text-emerald-400">ZARA_WARDROBE</span>
+        <header class="w-full border-b border-emerald-500/30 bg-zinc-900/80 backdrop-blur-md px-6 py-2 flex justify-between items-center text-xs tracking-widest z-[100] relative">
+            <div class="flex items-center gap-3">
+                <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
+                <span class="font-bold text-white">TAMI_OS // CORE_v1.6.3 // [GÖKTÜRK EDITION]</span>
             </div>
+            <div class="text-[10px] text-emerald-300 hidden sm:block">⚙️ EMULATOR_MODE // F: TAM EKRAN</div>
+            <div id="liveClock" class="text-emerald-300 font-bold">00:00:00</div>
+        </header>
 
-            <div onclick="alert('Erişim Reddedildi: Şifreli Projeler Çekirdeği.')" class="flex flex-col items-center justify-center p-3 rounded-xl border border-transparent hover:border-red-500/30 hover:bg-red-500/10 cursor-pointer transition text-center group">
-                <div class="text-3xl mb-1 group-hover:scale-110 transition opacity-60">📁</div>
-                <span class="text-[11px] font-bold tracking-wider text-zinc-500 group-hover:text-red-400">SECRET_PROJECTS</span>
-            </div>
-
-            <div onclick="alert('Terminal Bağlantısı: TAMI_SHELL aktif durumda.')" class="flex flex-col items-center justify-center p-3 rounded-xl border border-transparent hover:border-cyan-500/30 hover:bg-cyan-500/10 cursor-pointer transition text-center group">
-                <div class="text-3xl mb-1 group-hover:scale-110 transition opacity-60">💻</div>
-                <span class="text-[11px] font-bold tracking-wider text-zinc-500 group-hover:text-cyan-400">TAMI_TERMINAL</span>
-            </div>
-        </main>
-
-        <section class="w-full sm:w-64 bg-zinc-900/40 border border-emerald-500/10 rounded-xl p-4 self-end sm:self-start font-mono text-[11px] space-y-3 backdrop-blur-sm z-0">
-            <div class="border-b border-emerald-500/20 pb-2 flex justify-between items-center">
-                <span class="font-bold text-white tracking-widest text-xs">📊 SYSTEM MONITOR</span>
-                <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded uppercase">Online</span>
-            </div>
-            <div>
-                <span class="text-zinc-500 block">CURRENT_ADMIN:</span>
-                <span class="text-emerald-300 font-bold text-xs tracking-wider">Göktürk K. [ROOT]</span>
-            </div>
-            <div>
-                <span class="text-zinc-500 block">HARDWARE_MOD:</span>
-                <span class="text-white">Magnetic Shell v1.6</span>
-            </div>
-            <div class="space-y-1">
-                <div class="flex justify-between text-zinc-400">
-                    <span>CPU LOAD:</span>
-                    <span id="cpuLoad" class="text-emerald-400 font-bold">3%</span>
+        <div class="w-full h-[calc(100vh-40px)] relative flex flex-col sm:flex-row justify-between p-6">
+            
+            <main class="grid grid-cols-2 sm:grid-cols-1 gap-4 w-full sm:w-32 relative z-10 self-start">
+                <div onclick="openWindow('win-finance')" class="flex flex-col items-center justify-center p-3 rounded-xl border border-transparent hover:border-emerald-500/30 hover:bg-emerald-500/10 cursor-pointer transition text-center group">
+                    <div class="text-3xl mb-1 group-hover:scale-110 transition">💰</div>
+                    <span class="text-[11px] font-bold tracking-wider text-zinc-300 group-hover:text-emerald-400">TAMI_FINANCE</span>
                 </div>
-                <div class="w-full bg-zinc-950 h-1.5 rounded-full overflow-hidden border border-zinc-800">
-                    <div id="cpuBar" class="bg-emerald-500 h-full transition-all duration-700" style="width: 3%"></div>
-                </div>
-            </div>
-            <div class="pt-1 text-[10px] text-zinc-500 border-t border-zinc-800/60 flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
-                <span>All systems operational.</span>
-            </div>
-        </section>
 
+                <div onclick="openWindow('win-wardrobe')" class="flex flex-col items-center justify-center p-3 rounded-xl border border-transparent hover:border-emerald-500/30 hover:bg-emerald-500/10 cursor-pointer transition text-center group">
+                    <div class="text-3xl mb-1 group-hover:scale-110 transition">👕</div>
+                    <span class="text-[11px] font-bold tracking-wider text-zinc-300 group-hover:text-emerald-400">ZARA_WARDROBE</span>
+                </div>
+
+                <div onclick="alert('Erişim Reddedildi: Şifreli Projeler Çekirdeği.')" class="flex flex-col items-center justify-center p-3 rounded-xl border border-transparent hover:border-red-500/30 hover:bg-red-500/10 cursor-pointer transition text-center group">
+                    <div class="text-3xl mb-1 group-hover:scale-110 transition opacity-60">📁</div>
+                    <span class="text-[11px] font-bold tracking-wider text-zinc-500 group-hover:text-red-400">SECRET_PROJECTS</span>
+                </div>
+
+                <div onclick="alert('Terminal Bağlantısı: TAMI_SHELL aktif durumda.')" class="flex flex-col items-center justify-center p-3 rounded-xl border border-transparent hover:border-cyan-500/30 hover:bg-cyan-500/10 cursor-pointer transition text-center group">
+                    <div class="text-3xl mb-1 group-hover:scale-110 transition opacity-60">💻</div>
+                    <span class="text-[11px] font-bold tracking-wider text-zinc-500 group-hover:text-cyan-400">TAMI_TERMINAL</span>
+                </div>
+            </main>
+
+            <section class="w-full sm:w-64 bg-zinc-900/40 border border-emerald-500/10 rounded-xl p-4 self-end sm:self-start font-mono text-[11px] space-y-3 backdrop-blur-sm z-0">
+                <div class="border-b border-emerald-500/20 pb-2 flex justify-between items-center">
+                    <span class="font-bold text-white tracking-widest text-xs">📊 SYSTEM MONITOR</span>
+                    <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded uppercase">Online</span>
+                </div>
+                <div>
+                    <span class="text-zinc-500 block">CURRENT_ADMIN:</span>
+                    <span class="text-emerald-300 font-bold text-xs tracking-wider">Göktürk K. [ROOT]</span>
+                </div>
+                <div>
+                    <span class="text-zinc-500 block">HARDWARE_MOD:</span>
+                    <span class="text-white">Magnetic Shell v1.6</span>
+                </div>
+                <div class="space-y-1">
+                    <div class="flex justify-between text-zinc-400">
+                        <span>CPU LOAD:</span>
+                        <span id="cpuLoad" class="text-emerald-400 font-bold">3%</span>
+                    </div>
+                    <div class="w-full bg-zinc-950 h-1.5 rounded-full overflow-hidden border border-zinc-800">
+                        <div id="cpuBar" class="bg-emerald-500 h-full transition-all duration-700" style="width: 3%"></div>
+                    </div>
+                </div>
+                <div class="pt-1 text-[10px] text-zinc-500 border-t border-zinc-800/60 flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                    <span>All systems operational.</span>
+                </div>
+            </section>
+        </div>
+
+        <footer class="w-full border-t border-emerald-500/20 bg-zinc-950/90 text-[10px] px-6 py-1 flex justify-between items-center text-zinc-500 z-[100]">
+            <span>CPU_LOAD: STABLE // ROOT_USER: GÖKTÜRK_K</span>
+            <span>DESIGNED BY TAMI // SYSTEM_SHELL</span>
+        </footer>
     </div>
 
     <div id="win-finance" onmousedown="focusWindow('win-finance')" class="hidden absolute top-16 left-8 w-[95%] sm:w-[480px] h-[500px] bg-zinc-950 border border-emerald-500/30 shadow-2xl rounded-lg flex flex-col z-40 overflow-hidden">
@@ -179,4 +186,237 @@
                 <form id="subForm" class="flex flex-col gap-2">
                     <input type="text" id="subName" placeholder="Spotify" class="bg-zinc-950 border border-zinc-800 rounded-xl p-2 text-sm text-white focus:outline-none" required>
                     <input type="number" id="subPrice" placeholder="TL" class="bg-zinc-950 border border-zinc-800 rounded-xl p-2 text-sm text-white focus:outline-none" required>
-                    <input type="number" id="sub
+                    <input type="number" id="subDay" placeholder="Gün (1-31)" min="1" max="31" class="bg-zinc-950 border border-zinc-800 rounded-xl p-2 text-sm text-white focus:outline-none" required>
+                    <button type="submit" class="w-full bg-zinc-800 border border-zinc-700 text-white font-medium rounded-xl text-xs py-2 hover:bg-zinc-700 transition">Aboneliği Ekle</button>
+                </form>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-xs font-bold text-zinc-400">📋 Aktif Aboneliklerin</h3>
+                <div id="subList" class="flex flex-col gap-2"></div>
+            </div>
+        </div>
+        <div class="resizer"></div>
+    </div>
+
+    <div id="win-wardrobe" onmousedown="focusWindow('win-wardrobe')" class="hidden absolute top-24 left-16 w-[95%] sm:w-[500px] h-[520px] bg-zinc-950 border border-emerald-500/30 shadow-2xl rounded-lg flex flex-col z-40 overflow-hidden">
+        <div class="window-header bg-zinc-900 border-b border-emerald-500/30 px-4 py-2 flex justify-between items-center cursor-move select-none shrink-0">
+            <span class="text-xs font-bold text-emerald-400 tracking-wider">⚡ ZARA_WARDROBE.EXE</span>
+            <button onclick="closeWindow('win-wardrobe')" class="text-sm font-bold text-zinc-500 hover:text-red-400 transition">✕</button>
+        </div>
+        <div class="window-content w-full flex-1 p-4 overflow-y-auto text-zinc-100 font-sans">
+            <section class="bg-zinc-900 border border-zinc-800 p-4 rounded-2xl shadow-md mb-4">
+                <h2 class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-3">✨ Yeni Kıyafet Ekle</h2>
+                <form id="clothesForm" class="flex flex-col gap-3">
+                    <div>
+                        <label class="block text-[10px] text-zinc-500 mb-1">Kıyafet Adı</label>
+                        <input type="text" id="clothName" placeholder="Örn: Siyah Tişört" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2.5 text-sm text-white focus:outline-none" required>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] text-zinc-500 mb-1">Kategori</label>
+                        <select id="clothCategory" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2.5 text-sm text-zinc-300 focus:outline-none">
+                            <option value="Üst Giyim">Üst Giyim</option>
+                            <option value="Alt Giyim">Alt Giyim</option>
+                            <option value="Ayakkabı">Ayakkabı</option>
+                            <option value="Aksesuar">Aksesuar</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-white text-zinc-950 font-bold rounded-xl text-xs py-2.5 hover:bg-zinc-200 transition">Gardıroba Gönder (Bulut)</button>
+                </form>
+            </section>
+            <section class="space-y-3">
+                <h3 class="text-xs font-bold text-zinc-400 uppercase tracking-wider">📋 Benim Elbiselerim</h3>
+                <div id="clothesList" class="flex flex-col gap-2"></div>
+            </section>
+        </div>
+        <div class="resizer"></div>
+    </div>
+
+    <script>
+        // ================= FIREBASE BAĞLANTISI =================
+        const firebaseConfig = {
+            apiKey: "AIzaSyA7o96OrqwYXWby-TH7EPbdoXZo_kKscA",
+            authDomain: "akilli-gardirob.firebaseapp.com",
+            projectId: "akilli-gardirob",
+            storageBucket: "akilli-gardirob.appspot.com",
+            messagingSenderId: "801290029571",
+            appId: "1:801290029571:web:102b22c6423a92bca6dc36",
+            measurementId: "G-GWM8N1FE3M"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // ================= TAMI OS SİSTEM MOTORU VE BOOT SEQUENCE =================
+        const bootLog = document.getElementById('bootLog');
+        const welcomeContainer = document.getElementById('welcomeContainer');
+        const bootScreen = document.getElementById('bootScreen');
+        const mainDesktop = document.getElementById('mainDesktop');
+        
+        function updateClock() { document.getElementById('liveClock').textContent = new Date().toTimeString().split(' ')[0]; }
+        setInterval(updateClock, 1000); updateClock();
+
+        // Süs CPU Değişim Motoru
+        setInterval(() => {
+            const cpuEl = document.getElementById('cpuLoad');
+            const barEl = document.getElementById('cpuBar');
+            if (cpuEl && barEl) {
+                const randomCpu = Math.floor(Math.random() * 10) + 2;
+                cpuEl.textContent = randomCpu + "%";
+                barEl.style.width = randomCpu + "%";
+            }
+        }, 3000);
+
+        function handleBoot() {
+            let logLines = bootLog.innerHTML.split('<br>');
+            bootLog.innerHTML = "";
+            let currentLine = 0;
+
+            function printLog() {
+                if (currentLine < logLines.length - 1) {
+                    bootLog.innerHTML += logLines[currentLine] + '<br>';
+                    currentLine++;
+                    setTimeout(printLog, 120); 
+                } else {
+                    setTimeout(() => { welcomeContainer.classList.remove('hidden'); }, 300);
+                }
+            }
+            printLog();
+        }
+
+        function skipBoot() {
+            bootScreen.classList.add('hide');
+            mainDesktop.classList.remove('opacity-0'); // Masaüstünü pürüzsüzce göster
+            setTimeout(() => { bootScreen.style.display = 'none'; }, 1000);
+        }
+
+        // --- Pencere Kontrolleri ---
+        function openWindow(id) { document.getElementById(id).classList.remove('hidden'); focusWindow(id); }
+        function closeWindow(id) { document.getElementById(id).classList.add('hidden'); }
+        function focusWindow(id) {
+            document.getElementById('win-finance').classList.remove('window-active');
+            document.getElementById('win-wardrobe').classList.remove('window-active');
+            document.getElementById(id).classList.add('window-active');
+        }
+
+        // --- Manuel Taşıma / Boyutlandırma ---
+        document.querySelectorAll('[id^="win-"]').forEach(win => {
+            const header = win.querySelector('.window-header');
+            const resizer = win.querySelector('.resizer');
+            let isDragging = false, isResizing = false;
+            let startX, startY, startWidth, startHeight, startLeft, startTop;
+
+            header.addEventListener('mousedown', (e) => {
+                isDragging = true; focusWindow(win.id);
+                startX = e.clientX; startY = e.clientY;
+                startLeft = win.offsetLeft; startTop = win.offsetTop;
+                e.preventDefault();
+            });
+
+            resizer.addEventListener('mousedown', (e) => {
+                isResizing = true; focusWindow(win.id);
+                startX = e.clientX; startY = e.clientY;
+                startWidth = win.offsetWidth; startHeight = win.offsetHeight;
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) { win.style.left = (startLeft + (e.clientX - startX)) + 'px'; win.style.top = (startTop + (e.clientY - startY)) + 'px'; }
+                if (isResizing) { win.style.width = Math.max(320, startWidth + (e.clientX - startX)) + 'px'; win.style.height = Math.max(250, startHeight + (e.clientY - startY)) + 'px'; }
+            });
+            document.addEventListener('mouseup', () => { isDragging = false; isResizing = false; });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === 'f') { if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {}); else document.exitFullscreen(); }
+        });
+
+        // ================= SİSTEM JS MOTORLARI =================
+        const subForm = document.getElementById("subForm");
+        const subList = document.getElementById("subList");
+        const asistanMesaji = document.getElementById("asistanMesaji");
+        const safakMetni = document.getElementById("safakMetni");
+        const safakBar = document.getElementById("safakBar");
+        let haftalikHarclik = 0, hedefIsim = "", hedefFiyat = 0, toplamAylikGider = 0;
+
+        function hesaplaVeRaporla() {
+            if (haftalikHarclik <= 0 || hedefFiyat <= 0) return;
+            const aylikKazanc = haftalikHarclik * 4.33;
+            const aylikNetBiriken = aylikKazanc - toplamAylikGider;
+            if (aylikNetBiriken <= 0) { safakMetni.innerHTML = `❌ <span class='text-red-400 font-bold'>Giderler harçlığı geçiyor!</span>`; safakBar.style.width = "0%"; return; }
+            const gerekenAy = hedefFiyat / aylikNetBiriken;
+            const toplamKalanGun = Math.ceil(gerekenAy * 30);
+            const kalanHafta = Math.floor(toplamKalanGun / 7);
+            const kalanGunMod = toplamKalanGun % 7;
+            safakMetni.innerHTML = `🎯 <span class='text-lime-400 font-bold'>${hedefIsim}</span>:<br><span class='text-base text-white block font-black'>${kalanHafta} Hafta ${kalanGunMod} Gün</span>`;
+            const yuzde = Math.min(100, Math.max(10, (100 - (kalanHafta * 2)))); safakBar.style.width = `${yuzde}%`;
+        }
+
+        function tamiAsistanYukle() {
+            db.collection("user_finance").doc("tami_user").onSnapshot((doc) => {
+                if (doc.exists) {
+                    const data = doc.data(); 
+                    document.getElementById("weeklyIncome").value = data.weeklyIncome || ""; 
+                    document.getElementById("targetName").value = data.targetName || ""; 
+                    document.getElementById("targetPrice").value = data.targetPrice || ""; 
+                    haftalikHarclik = Number(data.weeklyIncome) || 0; 
+                    hedefIsim = data.targetName || ""; 
+                    hedefFiyat = Number(data.targetPrice) || 0; 
+                    hesaplaVeRaporla();
+                }
+            });
+            db.collection("subscriptions").onSnapshot((snapshot) => {
+                subList.innerHTML = ""; toplamAylikGider = 0; let guncelGun = new Date().getDate();
+                snapshot.forEach((doc) => {
+                    const sub = doc.data(); toplamAylikGider += Number(sub.price);
+                    let kalanGun = sub.day - guncelGun; if (kalanGun < 0) kalanGun = (30 - guncelGun) + Number(sub.day);
+                    const card = document.createElement("div"); card.className = "bg-zinc-900 border border-zinc-800 rounded-xl p-3 flex justify-between items-center text-zinc-100 mb-2";
+                    card.innerHTML = `<div><h4 class="text-xs font-bold uppercase text-white">${sub.name}</h4><p class="text-[10px] text-zinc-500">${sub.price} TL | Gün: ${sub.day}</p></div><button onclick="deleteSub('${doc.id}')" class="text-xs hover:text-red-400 p-1">🗑️</button>`;
+                    subList.appendChild(card);
+                });
+                asistanMesaji.innerHTML = `✅ <span class="text-lime-400 font-bold">Bulut Aktif.</span> Yaklaşan acil ödemen yok kanka.`;
+                hesaplaVeRaporla();
+            });
+        }
+
+        document.getElementById("saveFinanceBtn").addEventListener("click", async () => {
+            const w = document.getElementById("weeklyIncome").value; const tn = document.getElementById("targetName").value; const tp = document.getElementById("targetPrice").value;
+            if(!w || !tn || !tp) return alert("Boş bırakma kanka!");
+            try { await db.collection("user_finance").doc("tami_user").set({ weeklyIncome: Number(w), targetName: tn, targetPrice: Number(tp) }); alert("Bulutla senkronize edildi! 🚀"); } catch (e) { alert("Bulut hatası!"); }
+        });
+
+        subForm.addEventListener("submit", async (e) => {
+            e.preventDefault(); const n = document.getElementById("subName").value; const p = document.getElementById("subPrice").value; const d = document.getElementById("subDay").value;
+            try { await db.collection("subscriptions").add({ name: n, price: Number(p), day: Number(d) }); subForm.reset(); } catch (error) { alert("Hata!"); }
+        });
+
+        window.deleteSub = async (id) => { if(confirm("Silinsin mi kanka?")) await db.collection("subscriptions").doc(id).delete(); };
+
+        // ================= SMART GARDIROP MOTORU =================
+        const clothesForm = document.getElementById("clothesForm"); const clothesList = document.getElementById("clothesList");
+        function gardiropYukle() {
+            db.collection("clothes").onSnapshot((snapshot) => {
+                clothesList.innerHTML = "";
+                snapshot.forEach((doc) => {
+                    const cloth = doc.data(); const div = document.createElement("div");
+                    div.className = "bg-zinc-900 border border-zinc-800 rounded-xl p-3 flex justify-between items-center text-zinc-100 mb-2";
+                    div.innerHTML = `<div><p class="text-xs font-semibold text-white">${cloth.name}</p><span class="text-[9px] bg-zinc-900 border border-zinc-800 text-zinc-400 px-2 py-0.5 rounded-full">${cloth.category}</span></div><button onclick="deleteCloth('${doc.id}')" class="text-xs hover:text-red-400 p-1">🗑️</button>`;
+                    clothesList.appendChild(div);
+                });
+            });
+        }
+
+        clothesForm.addEventListener("submit", async (e) => {
+            e.preventDefault(); const name = document.getElementById("clothName").value; const category = document.getElementById("clothCategory").value;
+            try { await db.collection("clothes").add({ name: name, category: category, timestamp: new Date() }); clothesForm.reset(); } catch (error) { alert("Hata!"); }
+        });
+
+        window.deleteCloth = async (id) => { if(confirm("Kıyafeti silinsin mi kanka?")) await db.collection("clothes").doc(id).delete(); };
+
+        // ================= TÜM SİSTEMİ ATEŞLEME =================
+        window.onload = () => {
+            handleBoot();
+            tamiAsistanYukle();
+            gardiropYukle();
+        };
+    </script>
+</body>
+</html>
