@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAMI OS v1.0 - Cyber Shell</title>
+    <title>TAMI OS v1.1 - Fix & Drag</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
@@ -13,22 +13,22 @@
             background-image: linear-gradient(to right, rgba(16, 185, 129, 0.05) 1px, transparent 1px),
                               linear-gradient(to bottom, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
         }
+        .window-active { z-index: 50 !important; border-color: #34d399 !important; }
     </style>
 </head>
 <body class="bg-zinc-950 text-emerald-400 min-h-screen overflow-hidden cyber-grid relative select-none">
 
     <div class="absolute inset-0 bg-radial-at-t from-emerald-500/10 via-transparent to-transparent pointer-events-none"></div>
 
-    <header class="w-full border-b border-emerald-500/30 bg-zinc-900/80 backdrop-blur-md px-6 py-2 flex justify-between items-center text-xs tracking-widest z-50 relative">
+    <header class="w-full border-b border-emerald-500/30 bg-zinc-900/80 backdrop-blur-md px-6 py-2 flex justify-between items-center text-xs tracking-widest z-[100] relative">
         <div class="flex items-center gap-3">
             <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
-            <span class="font-bold text-white">TAMI_OS // CORE_READY</span>
+            <span class="font-bold text-white">TAMI_OS // CORE_v1.1</span>
         </div>
         <div id="liveClock" class="text-emerald-300 font-bold">00:00:00</div>
     </header>
 
-    <main class="p-8 grid grid-cols-1 gap-6 w-32 relative z-10">
-        
+    <main class="p-6 grid grid-cols-1 gap-4 w-32 relative z-10">
         <div onclick="openWindow('win-finance')" class="flex flex-col items-center justify-center p-3 rounded-xl border border-transparent hover:border-emerald-500/30 hover:bg-emerald-500/10 cursor-pointer transition text-center group">
             <div class="text-3xl mb-1 group-hover:scale-110 transition">💰</div>
             <span class="text-[11px] font-bold tracking-wider text-zinc-300 group-hover:text-emerald-400">TAMI_FINANCE</span>
@@ -38,53 +38,82 @@
             <div class="text-3xl mb-1 group-hover:scale-110 transition">👕</div>
             <span class="text-[11px] font-bold tracking-wider text-zinc-300 group-hover:text-emerald-400">ZARA_WARDROBE</span>
         </div>
-
     </main>
 
-    <div id="win-finance" class="hidden absolute top-1/4 left-1/4 w-[90%] sm:w-[450px] bg-zinc-900/95 border-2 border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.2)] rounded-lg overflow-hidden z-40">
-        <div class="bg-emerald-950 border-b border-emerald-500 px-4 py-2 flex justify-between items-center cursor-move">
-            <span class="text-xs font-bold text-emerald-300 tracking-wider">⚡ SYS_WINDOW: TAMI_FINANCE.EXE</span>
-            <button onclick="closeWindow('win-finance')" class="text-sm font-bold text-emerald-400 hover:text-red-400 transition">✕</button>
+    <div id="win-finance" onmousedown="focusWindow('win-finance')" class="hidden absolute top-20 left-10 w-[90%] sm:w-[450px] bg-zinc-900/95 border border-emerald-500/30 shadow-2xl rounded-lg overflow-hidden z-40">
+        <div class="window-header bg-zinc-900 border-b border-emerald-500/30 px-4 py-2 flex justify-between items-center cursor-move select-none">
+            <span class="text-xs font-bold text-emerald-400 tracking-wider">⚡ TAMI_FINANCE.EXE</span>
+            <button onclick="closeWindow('win-finance')" class="text-sm font-bold text-zinc-500 hover:text-red-400 transition">✕</button>
         </div>
-        <div class="p-4 h-64 bg-zinc-950/90 overflow-y-auto">
-            <iframe src="https://gokturk-k.github.io/tami-asistan/" class="w-full h-full border-0 rounded-md"></iframe>
-        </div>
-    </div>
-
-    <div id="win-wardrobe" class="hidden absolute top-1/3 left-1/3 w-[90%] sm:w-[500px] bg-zinc-900/95 border-2 border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.2)] rounded-lg overflow-hidden z-40">
-        <div class="bg-emerald-950 border-b border-emerald-500 px-4 py-2 flex justify-between items-center cursor-move">
-            <span class="text-xs font-bold text-emerald-300 tracking-wider">⚡ SYS_WINDOW: ZARA_WARDROBE.EXE</span>
-            <button onclick="closeWindow('win-wardrobe')" class="text-sm font-bold text-emerald-400 hover:text-red-400 transition">✕</button>
-        </div>
-        <div class="p-4 h-96 bg-zinc-950/90 overflow-y-auto">
-            <iframe src="https://gokturk-k.github.io/akilli-gardirob/" class="w-full h-full border-0 rounded-md"></iframe>
+        <div class="h-[400px] bg-zinc-950">
+            <iframe id="iframe-finance" src="" class="w-full h-full border-0"></iframe>
         </div>
     </div>
 
-    <footer class="absolute bottom-0 w-full border-t border-emerald-500/20 bg-zinc-950/90 text-[10px] px-6 py-1 flex justify-between items-center text-zinc-500">
-        <span>CPU_LOAD: 12% // MEMORY: 2.4GB / 16GB</span>
-        <span>DESIGNED BY TAMI // SECURE_SHELL</span>
+    <div id="win-wardrobe" onmousedown="focusWindow('win-wardrobe')" class="hidden absolute top-32 left-20 w-[90%] sm:w-[500px] bg-zinc-900/95 border border-emerald-500/30 shadow-2xl rounded-lg overflow-hidden z-40">
+        <div class="window-header bg-zinc-900 border-b border-emerald-500/30 px-4 py-2 flex justify-between items-center cursor-move select-none">
+            <span class="text-xs font-bold text-emerald-400 tracking-wider">⚡ ZARA_WARDROBE.EXE</span>
+            <button onclick="closeWindow('win-wardrobe')" class="text-sm font-bold text-zinc-500 hover:text-red-400 transition">✕</button>
+        </div>
+        <div class="h-[450px] bg-zinc-950">
+            <iframe id="iframe-wardrobe" src="" class="w-full h-full border-0"></iframe>
+        </div>
+    </div>
+
+    <footer class="absolute bottom-0 w-full border-t border-emerald-500/20 bg-zinc-950/90 text-[10px] px-6 py-1 flex justify-between items-center text-zinc-500 z-[100]">
+        <span>CPU_LOAD: 14% // SYS_DRAG: ACTIVE</span>
+        <span>DESIGNED BY TAMI // SYSTEM_SHELL</span>
     </footer>
 
     <script>
-        // Canlı Saat Motoru
+        // BURAYI KENDİ GITHUB ADINLA DEĞİŞTİR KANKA!
+        const githubUser = "gokturk-k"; 
+
         function updateClock() {
-            const now = new Date();
-            const timeString = now.toTimeString().split(' ')[0];
-            document.getElementById('liveClock').textContent = timeString;
+            document.getElementById('liveClock').textContent = new Date().toTimeString().split(' ')[0];
         }
-        setInterval(updateClock, 1000);
-        updateClock();
+        setInterval(updateClock, 1000); updateClock();
 
-        // Pencere Açma Fonksiyonu
         function openWindow(id) {
-            document.getElementById(id).classList.remove('hidden');
+            const win = document.getElementById(id);
+            win.classList.remove('hidden');
+            focusWindow(id);
+
+            // 404 Hatasını önlemek için dinamik link yükleme
+            if(id === 'win-finance' && !document.getElementById('iframe-finance').src) {
+                document.getElementById('iframe-finance').src = `https://${githubUser}.github.io/tami-asistan/`;
+            }
+            if(id === 'win-wardrobe' && !document.getElementById('iframe-wardrobe').src) {
+                document.getElementById('iframe-wardrobe').src = `https://${githubUser}.github.io/akilli-gardirob/`;
+            }
         }
 
-        // Pencere Kapatma Fonksiyonu
-        function closeWindow(id) {
-            document.getElementById(id).classList.add('hidden');
+        function closeWindow(id) { document.getElementById(id).classList.add('hidden'); }
+
+        function focusWindow(id) {
+            document.getElementById('win-finance').classList.remove('window-active');
+            document.getElementById('win-wardrobe').classList.remove('window-active');
+            document.getElementById(id).classList.add('window-active');
         }
+
+        // --- SÜRÜKLE BIRAK MOTORU (DRAG & DROP) ---
+        document.querySelectorAll('[id^="win-"]').forEach(win => {
+            const header = win.querySelector('.window-header');
+            let isDragging = false, toggleX = 0, toggleY = 0;
+
+            header.onmousedown = (e) => {
+                isDragging = true;
+                toggleX = e.clientX - win.offsetLeft;
+                toggleY = e.clientY - win.offsetTop;
+                focusWindow(win.id);
+                document.onmousemove = (ev) => {
+                    if (!isDragging) return;
+                    win.style.left = (ev.clientX - toggleX) + 'px';
+                    win.style.top = (ev.clientY - toggleY) + 'px';
+                };
+            };
+            document.onmouseup = () => { isDragging = false; };
+        });
     </script>
 </body>
 </html>
