@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAMI OS v1.3 - Final Core</title>
+    <title>TAMI OS v1.4 - Unstoppable Core</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@interactjs/interactjs/index.js"></script>
     <style>
         body { font-family: 'Share Tech Mono', monospace; }
         .cyber-grid {
@@ -16,29 +15,17 @@
         }
         .window-active { z-index: 50 !important; border-color: #34d399 !important; }
         
-        /* Güvenli ve Sorunsuz Pencere Ayarları */
-        .cyber-window {
+        /* Boyutlandırma Köşesi */
+        .resizer {
+            width: 15px;
+            height: 15px;
+            background: rgba(16, 185, 129, 0.3);
             position: absolute;
-            background: rgba(24, 24, 27, 0.98);
-            border: 1px border;
-            border-color: rgba(16, 185, 129, 0.3);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border-radius: 8px;
-            overflow: hidden;
-            touch-action: none; /* Mobil ve mouse çakışmasını önler */
-        }
-        
-        /* Sürüklerken fareyi kaçırmamak için görünmez katman */
-        .iframe-blocker {
-            display: none;
-            position: absolute;
-            top: 36px; /* Header'ın altından başlasın */
-            left: 0;
             right: 0;
             bottom: 0;
-            z-index: 10;
+            cursor: se-resize;
+            border-radius: 4px 0 0 0;
         }
-        .dragging .iframe-blocker { display: block; }
     </style>
 </head>
 <body class="bg-zinc-950 text-emerald-400 min-h-screen overflow-hidden cyber-grid relative select-none">
@@ -48,9 +35,9 @@
     <header class="w-full border-b border-emerald-500/30 bg-zinc-900/80 backdrop-blur-md px-6 py-2 flex justify-between items-center text-xs tracking-widest z-[100] relative">
         <div class="flex items-center gap-3">
             <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
-            <span class="font-bold text-white">TAMI_OS // CORE_v1.3</span>
+            <span class="font-bold text-white">TAMI_OS // UNSTOPPABLE_v1.4</span>
         </div>
-        <div class="text-[10px] text-zinc-500 hidden sm:block">⚙️ TAM EKRAN: 'F' // BÜYÜTMEK İÇİN KÖŞELERDEN TUT kanka</div>
+        <div class="text-[10px] text-zinc-500 hidden sm:block">⚙️ TAM EKRAN: 'F' // TUT SÜRÜKLE VE SAĞ ALTTAN BÜYÜT KANKA</div>
         <div id="liveClock" class="text-emerald-300 font-bold">00:00:00</div>
     </header>
 
@@ -66,35 +53,35 @@
         </div>
     </main>
 
-    <div id="win-finance" onmousedown="focusWindow('win-finance')" class="cyber-window hidden top-20 left-10 w-[90%] sm:w-[450px] h-[400px] z-40 flex flex-col">
+    <div id="win-finance" onmousedown="focusWindow('win-finance')" class="hidden absolute top-20 left-10 w-[90%] sm:w-[450px] h-[400px] bg-zinc-900/95 border border-emerald-500/30 shadow-2xl rounded-lg flex flex-col z-40">
         <div class="window-header bg-zinc-900 border-b border-emerald-500/30 px-4 py-2 flex justify-between items-center cursor-move select-none shrink-0">
             <span class="text-xs font-bold text-emerald-400 tracking-wider">⚡ TAMI_FINANCE.EXE</span>
             <button onclick="closeWindow('win-finance')" class="text-sm font-bold text-zinc-500 hover:text-red-400 transition">✕</button>
         </div>
-        <div class="w-full flex-1 bg-zinc-950 relative overflow-hidden">
-            <div class="iframe-blocker"></div>
+        <div class="w-full flex-1 bg-zinc-950 relative overflow-hidden iframe-container">
             <iframe id="iframe-finance" src="" class="w-full h-full border-0"></iframe>
         </div>
+        <div class="resizer"></div>
     </div>
 
-    <div id="win-wardrobe" onmousedown="focusWindow('win-wardrobe')" class="cyber-window hidden top-32 left-20 w-[90%] sm:w-[500px] h-[480px] z-40 flex flex-col">
+    <div id="win-wardrobe" onmousedown="focusWindow('win-wardrobe')" class="hidden absolute top-32 left-20 w-[90%] sm:w-[500px] h-[480px] bg-zinc-900/95 border border-emerald-500/30 shadow-2xl rounded-lg flex flex-col z-40">
         <div class="window-header bg-zinc-900 border-b border-emerald-500/30 px-4 py-2 flex justify-between items-center cursor-move select-none shrink-0">
             <span class="text-xs font-bold text-emerald-400 tracking-wider">⚡ ZARA_WARDROBE.EXE</span>
             <button onclick="closeWindow('win-wardrobe')" class="text-sm font-bold text-zinc-500 hover:text-red-400 transition">✕</button>
         </div>
-        <div class="w-full flex-1 bg-zinc-950 relative overflow-hidden">
-            <div class="iframe-blocker"></div>
+        <div class="w-full flex-1 bg-zinc-950 relative overflow-hidden iframe-container">
             <iframe id="iframe-wardrobe" src="" class="w-full h-full border-0"></iframe>
         </div>
+        <div class="resizer"></div>
     </div>
 
     <footer class="absolute bottom-0 w-full border-t border-emerald-500/20 bg-zinc-950/90 text-[10px] px-6 py-1 flex justify-between items-center text-zinc-500 z-[100]">
-        <span>CPU_LOAD: 8% // ENGINE: INTERACT_JS // SYSTEM_OK</span>
+        <span>CPU_LOAD: 5% // SAF_JS_ENGINE // NO_BUGS</span>
         <span>DESIGNED BY TAMI // SYSTEM_SHELL</span>
     </footer>
 
     <script>
-        // --- 🚨 KANKA LİNKLER SİYAH EKRAN VERİRSE KENDİ SİTELERİNİN TAM LİNKİNİ BURAYA YAZ 🚨 ---
+        // --- 🚨 KANKA LİNKLER SİYAH EKRAN VERİRSE BURAYI KONTROL ET 🚨 ---
         const FINANCE_URL = "https://gokturk-k.github.io/tami-asistan/";
         const WARDROBE_URL = "https://gokturk-k.github.io/akilli-gardirob/";
 
@@ -124,60 +111,68 @@
             document.getElementById(id).classList.add('window-active');
         }
 
-        // --- INTERACT.JS İLE KURŞUN GEÇİRMEZ SÜRÜKLEME VE BÜYÜTME MOTORU ---
-        interact('.cyber-window')
-            .draggable({
-                allowFrom: '.window-header', // Sadece üst barından tutunca sürüklensin
-                listeners: {
-                    start(event) {
-                        document.body.classList.add('dragging');
-                    },
-                    move(event) {
-                        const { target } = event;
-                        let x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-                        let y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+        // --- SAF JAVASCRIPT KURŞUN GEÇİRMEZ SÜRÜKLEME VE BÜYÜTME MOTORU ---
+        document.querySelectorAll('[id^="win-"]').forEach(win => {
+            const header = win.querySelector('.window-header');
+            const resizer = win.querySelector('.resizer');
+            const iframe = win.querySelector('iframe');
+            
+            let isDragging = false;
+            let isResizing = false;
+            let startX, startY, startWidth, startHeight, startLeft, startTop;
 
-                        target.style.transform = `translate(${x}px, ${y}px)`;
-                        target.setAttribute('data-x', x);
-                        target.setAttribute('data-y', y);
-                    },
-                    end(event) {
-                        document.body.classList.remove('dragging');
-                    }
-                }
-            })
-            .resizable({
-                edges: { left: true, right: true, bottom: true, top: false }, // Sağdan, soldan ve alttan büyütülebilir
-                listeners: {
-                    start(event) {
-                        document.body.classList.add('dragging');
-                    },
-                    move(event) {
-                        const { target } = event;
-                        let x = (parseFloat(target.getAttribute('data-x')) || 0);
-                        let y = (parseFloat(target.getAttribute('data-y')) || 0);
-
-                        target.style.width = event.rect.width + 'px';
-                        target.style.height = event.rect.height + 'px';
-
-                        x += event.deltaRect.left;
-                        y += event.deltaRect.top;
-
-                        target.style.transform = `translate(${x}px, ${y}px)`;
-                        target.setAttribute('data-x', x);
-                        target.setAttribute('data-y', y);
-                    },
-                    end(event) {
-                        document.body.classList.remove('dragging');
-                    }
-                },
-                modifiers: [
-                    interact.modifiers.restrictSize({
-                        min: { width: 320, height: 250 },
-                        max: { width: 1000, height: 800 }
-                    })
-                ]
+            // --- SÜRÜKLEME ---
+            header.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                iframe.style.pointerEvents = 'none'; // İframe'i kilitle ki fareyi yutmasın!
+                focusWindow(win.id);
+                
+                startX = e.clientX;
+                startY = e.clientY;
+                startLeft = win.offsetLeft;
+                startTop = win.offsetTop;
+                
+                e.preventDefault();
             });
+
+            // --- BÜYÜTME ---
+            resizer.addEventListener('mousedown', (e) => {
+                isResizing = true;
+                iframe.style.pointerEvents = 'none'; // İframe'i kilitle!
+                focusWindow(win.id);
+                
+                startX = e.clientX;
+                startY = e.clientY;
+                startWidth = win.offsetWidth;
+                startHeight = win.offsetHeight;
+                
+                e.preventDefault();
+            });
+
+            // --- FARE HAREKETİ (ORTAK) ---
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    let deltaX = e.clientX - startX;
+                    let deltaY = e.clientY - startY;
+                    win.style.left = (startLeft + deltaX) + 'px';
+                    win.style.top = (startTop + deltaY) + 'px';
+                }
+                
+                if (isResizing) {
+                    let deltaX = e.clientX - startX;
+                    let deltaY = e.clientY - startY;
+                    win.style.width = Math.max(320, startWidth + deltaX) + 'px';
+                    win.style.height = Math.max(250, startHeight + deltaY) + 'px';
+                }
+            });
+
+            // --- FAREYİ BIRAKMA (ORTAK) ---
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                isResizing = false;
+                iframe.style.pointerEvents = 'auto'; // İframe'i tekrar serbest bırak
+            });
+        });
 
         // --- F TUŞU TAM EKRAN ---
         document.addEventListener('keydown', function(e) {
