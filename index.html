@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAMI OS v1.6.6 - Göktürk Edition</title>
+    <title>TAMI OS v1.6.7 - Göktürk Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -31,7 +31,7 @@
         .window-content::-webkit-scrollbar-track { background: #09090b; }
         .window-content::-webkit-scrollbar-thumb { background: #10b981; border-radius: 10px; }
         
-        /* AÇILIŞ ANİMASYONU CSS */
+        /* SAF CSS AÇILIŞ ANİMASYONLARI */
         @keyframes type {
           from { width: 0; }
           to { width: 100%; }
@@ -48,16 +48,11 @@
             border-right: 2px solid #10b981;
             white-space: nowrap;
         }
-        #bootScreen.hide {
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(1.1);
-        }
     </style>
 </head>
 <body class="bg-zinc-950 text-emerald-400 min-h-screen overflow-hidden cyber-grid relative select-none">
 
-    <div id="bootScreen" class="fixed inset-0 bg-black z-[1000] flex flex-col items-center justify-center transition-all duration-1000 font-mono text-emerald-400">
+    <div id="bootScreen" class="fixed inset-0 bg-black z-[1000] flex flex-col items-center justify-center font-mono text-emerald-400" style="transition: opacity 0.8s ease, visibility 0.8s;">
         <div class="space-y-4 max-w-lg w-full px-8">
             <div id="bootLog" class="text-[11px] h-40 overflow-hidden leading-relaxed text-zinc-600">
                 &gt; TAMI OS BOOT_SEQUENCE [ACTIVE]<br>
@@ -69,7 +64,7 @@
                 &gt; GÖKTÜRK K. PROFILE DETECTED...<br>
             </div>
             
-            <div id="welcomeContainer" class="hidden text-center mt-6">
+            <div id="welcomeContainer" class="text-center mt-6" style="display: none; opacity: 0; transition: opacity 0.5s ease;">
                 <h1 class="text-xl font-black text-white tracking-widest"><span class="typing-text">SYSTEM_ADMIN: GÖKTÜRK K.</span></h1>
                 <p id="bootMessage" class="text-emerald-300 text-xs mt-3 font-bold">Hoşgeldin Göktürk. Sistem Yetkisi Verildi.</p>
                 <button onclick="skipBoot()" class="text-xs bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 px-6 py-2 mt-8 rounded-full hover:bg-emerald-500 hover:text-black transition cursor-pointer">Sisteme Giriş Yap</button>
@@ -77,14 +72,14 @@
         </div>
     </div>
 
-    <div id="mainDesktop" class="opacity-0 transition-opacity duration-1000 w-full min-h-screen flex flex-col justify-between relative">
+    <div id="mainDesktop" class="w-full min-h-screen flex flex-col justify-between relative" style="opacity: 0; transition: opacity 0.8s ease;">
         
         <div class="absolute inset-0 bg-radial-at-t from-emerald-500/10 via-transparent to-transparent pointer-events-none"></div>
 
         <header class="w-full border-b border-emerald-500/30 bg-zinc-900/80 backdrop-blur-md px-6 py-2 flex justify-between items-center text-xs tracking-widest z-[100] relative">
             <div class="flex items-center gap-3">
                 <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
-                <span class="font-bold text-white">TAMI_OS // CORE_v1.6.6 // [COMMAND_CENTER]</span>
+                <span class="font-bold text-white">TAMI_OS // CORE_v1.6.7 // [COMMAND_CENTER]</span>
             </div>
             <div class="text-[10px] text-emerald-300 hidden sm:block">⚙️ EMULATOR_MODE // F: TAM EKRAN</div>
             <div id="liveClock" class="text-emerald-300 font-bold">00:00:00</div>
@@ -98,4 +93,6 @@
                         <div class="text-3xl mb-1 group-hover:scale-110 transition">💰</div>
                         <span class="text-[11px] font-bold tracking-wider text-zinc-300 group-hover:text-emerald-400">TAMI_FINANCE</span>
                     </div>
-                
+
+                    <div onclick="openWindow('win-wardrobe')" class="flex flex-col items-center justify-center p-3 rounded-xl border border-transparent hover:border-emerald-500/30 hover:bg-emerald-500/10 cursor-pointer transition text-center group">
+                        <div class="text-3xl mb-1 group-hover:scale-110 transition">👕</div>
