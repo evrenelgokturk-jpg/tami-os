@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAMI OS v1.7.5 - Safe Core Edition</title>
+    <title>TAMI OS v1.8.0 - Cycling Core Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     
@@ -37,10 +37,11 @@
         <div class="space-y-4 max-w-lg w-full px-8">
             <div id="bootLog" class="text-[11px] h-40 overflow-hidden leading-relaxed text-zinc-600">
                 &gt; TAMI OS BOOT_SEQUENCE [ACTIVE]<br>
-                &gt; CORE_KERNEL_v1.7.5 LOADED...<br>
+                &gt; CORE_KERNEL_v1.8.0 LOADED...<br>
                 &gt; DECRYPTION_KEYS_VERIFIED...<br>
                 &gt; ANTI_LOCK_ENGINE: ENABLED...<br>
                 &gt; CONNECTING TO CLOUD HUB...<br>
+                &gt; CYCLING_MODULE_INITIALIZED...<br>
                 &gt; GÖKTÜRK K. PROFILE DETECTED...<br>
             </div>
             
@@ -59,7 +60,7 @@
         <header class="w-full border-b border-emerald-500/30 bg-zinc-900/80 backdrop-blur-md px-6 py-2 flex justify-between items-center text-xs tracking-widest z-[100] relative">
             <div class="flex items-center gap-3">
                 <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
-                <span class="font-bold text-white">TAMI_OS // CORE_v1.7.5 // [SAFE_MODE]</span>
+                <span class="font-bold text-white">TAMI_OS // CORE_v1.8.0 // [COMMAND_CENTER]</span>
             </div>
             <div class="text-[10px] text-emerald-300 hidden sm:block">⚙️ EMULATOR_MODE // F: TAM EKRAN</div>
             <div id="liveClock" class="text-emerald-300 font-bold">00:00:00</div>
@@ -77,6 +78,11 @@
                     <div onclick="openWindow('win-wardrobe')" class="flex flex-col items-center justify-center p-3 rounded-xl border border-transparent hover:border-emerald-500/30 hover:bg-emerald-500/10 cursor-pointer transition text-center group">
                         <div class="text-3xl mb-1 group-hover:scale-110 transition">👕</div>
                         <span class="text-[11px] font-bold tracking-wider text-zinc-300 group-hover:text-emerald-400">ZARA_WARDROBE</span>
+                    </div>
+
+                    <div onclick="openWindow('win-cycling')" class="flex flex-col items-center justify-center p-3 rounded-xl border border-transparent hover:border-emerald-500/30 hover:bg-emerald-500/10 cursor-pointer transition text-center group">
+                        <div class="text-3xl mb-1 group-hover:scale-110 transition">🚲</div>
+                        <span class="text-[11px] font-bold tracking-wider text-zinc-300 group-hover:text-emerald-400">TAMI_CYCLING</span>
                     </div>
 
                     <a href="https://github.com/evrenelgokturk-jpg" target="_blank" class="flex flex-col items-center justify-center p-3 rounded-xl border border-transparent hover:border-purple-500/40 hover:bg-purple-500/10 cursor-pointer transition text-center group">
@@ -244,7 +250,44 @@
                 <div id="clothesList" class="flex flex-col gap-2"></div>
             </section>
         </div>
-        <div class="resizer =========================================="></div>
+        <div class="resizer"></div>
+    </div>
+
+    <div id="win-cycling" onmousedown="focusWindow('win-cycling')" class="hidden absolute top-28 left-20 w-[95%] sm:w-[480px] h-[500px] bg-zinc-950 border border-emerald-500/30 shadow-2xl rounded-lg flex flex-col z-40 overflow-hidden">
+        <div class="window-header bg-zinc-900 border-b border-emerald-500/30 px-4 py-2 flex justify-between items-center cursor-move select-none shrink-0">
+            <span class="text-xs font-bold text-emerald-400 tracking-wider">⚡ TAMI_CYCLING.EXE</span>
+            <button onclick="closeWindow('win-cycling')" class="text-sm font-bold text-zinc-500 hover:text-red-400 transition">✕</button>
+        </div>
+        <div class="window-content w-full flex-1 p-4 overflow-y-auto text-zinc-100 font-sans">
+            <section class="bg-zinc-900 border border-zinc-800 p-4 rounded-2xl shadow-md mb-4">
+                <h2 class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-3">🏁 Yeni Sürüş / Bakım Kaydet</h2>
+                <form id="cyclingForm" class="flex flex-col gap-3">
+                    <div>
+                        <label class="block text-[10px] text-zinc-500 mb-1">Rota / İşlem Adı</label>
+                        <input type="text" id="rideName" placeholder="Örn: Kemalpaşa Köy Turu veya Zincir Değişimi" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2.5 text-sm text-white focus:outline-none" required>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] text-zinc-500 mb-1">Mesafe (KM)</label>
+                            <input type="number" id="rideDistance" placeholder="Örn: 15" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2.5 text-sm text-white focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-zinc-500 mb-1">Tür</label>
+                            <select id="rideType" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-2.5 text-sm text-zinc-300 focus:outline-none">
+                                <option value="Sürüş">🚴 Sürüş</option>
+                                <option value="Bakım/Onarım">🔧 Bakım / Onarım</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-emerald-500 text-zinc-950 font-bold rounded-xl text-xs py-2.5 hover:bg-emerald-400 transition">Veritabanına İşle</button>
+                </form>
+            </section>
+            <section class="space-y-3">
+                <h3 class="text-xs font-bold text-zinc-400 uppercase tracking-wider">📜 Sürüş Logları & Bakım Günlüğü</h3>
+                <div id="cyclingList" class="flex flex-col gap-2"></div>
+            </section>
+        </div>
+        <div class="resizer"></div>
     </div>
 
     <script>
@@ -256,7 +299,7 @@
         const mainDesktop = document.getElementById('mainDesktop');
         const asistanMesaji = document.getElementById("asistanMesaji");
 
-        // 1. GÜVENLİ SAAT VE CORE ENGINE (Firebase'den bağımsız tetiklenir)
+        // 1. SAAT VE CORE ENGINE
         function updateClock() { document.getElementById('liveClock').textContent = new Date().toTimeString().split(' ')[0]; }
         setInterval(updateClock, 1000); updateClock();
 
@@ -293,6 +336,7 @@
         function focusWindow(id) {
             document.getElementById('win-finance').classList.remove('window-active');
             document.getElementById('win-wardrobe').classList.remove('window-active');
+            document.getElementById('win-cycling').classList.remove('window-active');
             document.getElementById(id).classList.add('window-active');
         }
 
@@ -312,11 +356,12 @@
             document.addEventListener('mouseup', () => { isDragging = false; isResizing = false; });
         });
 
-        // ================= FINANCE & WARDROBE LOCAL ENGINE =================
+        // ================= FINANCE, WARDROBE & CYCLING ENGINES =================
         let haftalikHarclik = 0, hedefIsim = "", hedefFiyat = 0, toplamAylikGider = 0;
         const subForm = document.getElementById("subForm"); const subList = document.getElementById("subList");
         const safakMetni = document.getElementById("safakMetni"); const safakBar = document.getElementById("safakBar");
         const clothesForm = document.getElementById("clothesForm"); const clothesList = document.getElementById("clothesList");
+        const cyclingForm = document.getElementById("cyclingForm"); const cyclingList = document.getElementById("cyclingList");
 
         function hesaplaVeRaporla() {
             try {
@@ -330,7 +375,7 @@
             } catch (err) {}
         }
 
-        // Local Storage Fallback'leri (İnternet koptuğunda veri kaybolmasın)
+        // --- Render Local Functions ---
         function renderLocalSubs() {
             const localSubs = JSON.parse(localStorage.getItem('tami_subs') || '[]'); subList.innerHTML = ""; toplamAylikGider = 0;
             localSubs.forEach((sub, index) => {
@@ -351,20 +396,42 @@
             });
         }
 
-        // ================= FIREBASE LAZY LOADER (ARKA PLANDA YÜKLEME) =================
+        function renderLocalCycling() {
+            const localRides = JSON.parse(localStorage.getItem('tami_cycling') || '[]'); cyclingList.innerHTML = "";
+            localRides.forEach((ride, index) => {
+                const div = document.createElement("div"); div.className = "bg-zinc-900 border border-zinc-800 rounded-xl p-3 flex justify-between items-center text-zinc-100 mb-2";
+                div.innerHTML = `<div><p class="text-xs font-semibold text-white">${ride.name}</p><span class="text-[9px] text-zinc-400">${ride.type} ${ride.distance ? '// ' + ride.distance + ' KM' : ''}</span></div><button onclick="deleteRideLocal(${index})" class="text-xs hover:text-red-400 p-1">🗑️</button>`;
+                cyclingList.appendChild(div);
+            });
+        }
+
+        // --- Load Sub-Modules ---
+        function cyclingYukle() {
+            if (db) {
+                db.collection("cycling").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+                    cyclingList.innerHTML = ""; const arr = [];
+                    snapshot.forEach((doc) => {
+                        const ride = doc.data(); arr.push(ride);
+                        const div = document.createElement("div"); div.className = "bg-zinc-900 border border-zinc-800 rounded-xl p-3 flex justify-between items-center mb-2";
+                        div.innerHTML = `<div><p class="text-xs font-semibold text-white">${ride.name}</p><span class="text-[9px] text-zinc-400">${ride.type} ${ride.distance ? '// ' + ride.distance + ' KM' : ''}</span></div><button onclick="deleteRideCloud('${doc.id}')" class="text-xs hover:text-red-400 p-1">🗑️</button>`;
+                        cyclingList.appendChild(div);
+                    });
+                    localStorage.setItem('tami_cycling', JSON.stringify(arr));
+                }, e => { renderLocalCycling(); });
+            } else { renderLocalCycling(); }
+        }
+
+        // ================= FIREBASE LAZY LOADER =================
         function injectFirebaseSDK() {
-            handleBoot(); // Firebase ne olursa olsun boot ekranını hemen başlat!
-            
-            // Eğer 3 saniye içinde Firebase yüklenmezse sistemi Bypass et
+            handleBoot();
             const fallbackTimeout = setTimeout(() => {
-                console.log("Firebase Yükleme Zaman Aşımı. Yerel Mod Aktif.");
                 asistanMesaji.innerHTML = `⚠️ <span class="text-yellow-400 font-bold">Yerel Mod.</span> Bulut çevrimdışı ama sistem aktif kanka.`;
                 const financeData = JSON.parse(localStorage.getItem('tami_finance') || '{}');
                 document.getElementById("weeklyIncome").value = financeData.weeklyIncome || "";
                 document.getElementById("targetName").value = financeData.targetName || "";
                 document.getElementById("targetPrice").value = financeData.targetPrice || "";
                 haftalikHarclik = Number(financeData.weeklyIncome) || 0; hedefIsim = financeData.targetName || ""; hedefFiyat = Number(financeData.targetPrice) || 0;
-                renderLocalSubs(); renderLocalClothes();
+                renderLocalSubs(); renderLocalClothes(); renderLocalCycling();
             }, 3000);
 
             const scriptApp = document.createElement('script');
@@ -373,7 +440,7 @@
                 const scriptStore = document.createElement('script');
                 scriptStore.src = "https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js";
                 scriptStore.onload = () => {
-                    clearTimeout(fallbackTimeout); // Firebase yetişti, yerel modu iptal et!
+                    clearTimeout(fallbackTimeout);
                     try {
                         const firebaseConfig = {
                             apiKey: "AIzaSyA7o96OrqwYXWby-TH7EPbdoXZo_kKscA",
@@ -425,9 +492,10 @@
                 });
                 localStorage.setItem('tami_clothes', JSON.stringify(arr));
             });
+            cyclingYukle();
         }
 
-        // Form Gönderimleri (Hem buluta hem lokale)
+        // --- Forms Event Listeners ---
         document.getElementById("saveFinanceBtn").addEventListener("click", async () => {
             const w = document.getElementById("weeklyIncome").value; const tn = document.getElementById("targetName").value; const tp = document.getElementById("targetPrice").value;
             const obj = { weeklyIncome: Number(w), targetName: tn, targetPrice: Number(tp) };
@@ -454,10 +522,24 @@
             clothesForm.reset();
         });
 
+        cyclingForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const name = document.getElementById("rideName").value; const distance = document.getElementById("rideDistance").value; const type = document.getElementById("rideType").value;
+            const obj = { name, distance: distance ? Number(distance) : null, type, timestamp: new Date().toISOString() };
+            if(db) { try { await db.collection("cycling").add(obj); } catch(error) {} } else {
+                const localRides = JSON.parse(localStorage.getItem('tami_cycling') || '[]'); localRides.unshift(obj);
+                localStorage.setItem('tami_cycling', JSON.stringify(localRides)); renderLocalCycling();
+            }
+            cyclingForm.reset();
+        });
+
+        // --- Delete Functions ---
         window.deleteSubCloud = async (id) => { if(confirm("Silinsin mi kanka?")) await db.collection("subscriptions").doc(id).delete(); };
         window.deleteClothCloud = async (id) => { if(confirm("Silinsin mi kanka?")) await db.collection("clothes").doc(id).delete(); };
+        window.deleteRideCloud = async (id) => { if(confirm("Bu kaydı silinsin mi kanka?")) await db.collection("cycling").doc(id).delete(); };
         window.deleteSubLocal = (index) => { const localSubs = JSON.parse(localStorage.getItem('tami_subs') || '[]'); localSubs.splice(index,1); localStorage.setItem('tami_subs', JSON.stringify(localSubs)); renderLocalSubs(); };
         window.deleteClothLocal = (index) => { const localClothes = JSON.parse(localStorage.getItem('tami_clothes') || '[]'); localClothes.splice(index,1); localStorage.setItem('tami_clothes', JSON.stringify(localClothes)); renderLocalClothes(); };
+        window.deleteRideLocal = (index) => { const localRides = JSON.parse(localStorage.getItem('tami_cycling') || '[]'); localRides.splice(index,1); localStorage.setItem('tami_cycling', JSON.stringify(localRides)); renderLocalCycling(); };
 
         window.onload = injectFirebaseSDK;
     </script>
